@@ -14,15 +14,15 @@ run as server -> tomcat 9.0 -> port error > Servers폴더 -> Tomcat v9.0 ... -> 
 
 html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로 사용 -> json(경량화)
 
-JSP
+### JSP
 서버에서 jsp -> java로 변환 -> class로 컴파일 -> 결과 출력
-C:\Users\216\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\2023webPrjectB\org\apache\jsp
+ > C:\Users\216\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\2023webPrjectB\org\apache\jsp
 해당 경로에 jsp파일 저장 및 빌드
 
--jsp 구성요소: 지시어/ 스크립트릿/ 선언부 etc
-> 지시어: <%@지시어명 속성 ... %> jsp 환경 설정 명령어
-> 스크립트릿: <% ... %> java코드 약간 python f{}
-> 표현식: <%= ... %> 변수 및 메소드 값 리턴
-> 선언부: <%! ... %> 변수 및 메소드 선언
+#### jsp 구성요소: 지시어/ 스크립트릿/ 선언부 etc
+- 지시어: ```<%@지시어명 속성 ... %>``` jsp 환경 설정 명령어
+- 스크립트릿: ```<% ... %>``` java코드 약간 python f{}
+- 표현식: ```<%= ... %>``` 변수 및 메소드 값 리턴
+- 선언부: ```<%! ... %>``` 변수 및 메소드 선언
 
-Sublet
+### Sublet
