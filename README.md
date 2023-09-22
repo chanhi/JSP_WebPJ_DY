@@ -15,23 +15,38 @@ run as server -> tomcat 9.0 -> port error > Servers폴더 -> Tomcat v9.0 ... -> 
 html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로 사용 -> json(경량화)
 
 ### JSP
+> Java를 사용하여 서버 측에서 웹 페이지를 생성해 웹 브라우저로 전송하는 동적 웹 페이지 개발 프로그래밍 언어
+
 서버에서 jsp -> java로 변환 -> class로 컴파일 -> 결과 출력
  > C:\Users\216\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\2023webPrjectB\org\apache\jsp
 해당 경로에 jsp파일 저장 및 빌드
 
 #### jsp 구성요소: 지시어/ 스크립트릿/ 선언부 etc
 - 지시어: ```<%@지시어명 속성 ... %>``` jsp 환경 설정 명령어
+   - ```<%@ page language="java" contentType=" ... %>``` -> jsp 페이지에 대한 환경 설정(언어, 인코딩 등)
 - 스크립트릿: ```<% ... %>``` java코드 약간 python f{}
 - 표현식: ```<%= ... %>``` 변수 및 메소드 값 리턴
 - 선언부: ```<%! ... %>``` 변수 및 메소드 선언
 
 #### 내장객체
 - request
+   - ```request.getParameter()```
+   - ```request.getParameterValues()```
 - response
+   - ```response.redirect()``` : 웹 브라우저에게 다른 페이지로 이동하라고 지시
 - out
 
+#### 액션태그
+- 반드시 종료태그 사용
+- <jsp:include>
+- <jsp:forward> : redirect와 다르게 서버에서 다른 페이지로 변경한 뒤 클라이언트에 넘겨줌
+- <jsp:useBean>
+- <jsp:param>
+
 _데이터 전송 -> body: 데이터 본문, header: 데이터 주소 등등_
-* post방식: 파라미터가 바디에 포함됨(보안, 데이터 제한 없음, 다루기 까다로움)
-* get방식: 파라미터가 헤더에 포함됨(보안에 취약, 전송하는 데이터의 크기가 제한 됨, 다루기 쉬움)
+* post방식: 파라미터가 바디에 포함됨(보안, 데이터 제한 없음, 다루기 까다로움) -> 로그인창 등
+* get방식: 파라미터가 헤더에 포함됨(보안에 취약, 전송하는 데이터의 크기가 제한 됨, 다루기 쉬움) -> 검색창 등
+
+* 한글은 post의 경우 서버에서 ```request.setCharacterEncoding("utf-8")```을 통해 변환을 시켜주어야 한다.
 
 ### Sublet
