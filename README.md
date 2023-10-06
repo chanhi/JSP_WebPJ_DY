@@ -30,11 +30,19 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 
 #### 내장객체
 - request
-   - ```request.getParameter()```
+   - ```request.getParameter()``` :파라미터 읽기
    - ```request.getParameterValues()```
 - response
-   - ```response.redirect()``` : 웹 브라우저에게 다른 페이지로 이동하라고 지시
-- out
+   - ```response.sendRedirect()``` : 웹 브라우저에게 다른 페이지로 이동하라고 지시
+- out :버퍼를 이용해서 내용을 출력
+   - ```flush()``` : 버퍼의 내용을 모두 내보
+- session
+   - setAttribute("name", "value")
+   - removeAttribute("name")
+   - getAttribute("name:)
+- application
+
+* page -> request -> session -> application
 
 #### 액션태그
 - 반드시 종료태그 사용
@@ -42,6 +50,8 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 - <jsp:forward> : redirect와 다르게 서버에서 다른 페이지로 변경한 뒤 클라이언트에 넘겨줌
 - <jsp:useBean>
 - <jsp:param>
+
+_response.sendRedirect() 와 <jsp:forward> : 전자는 클라이언트에게 해당 페이지(jsp)로 이동하라고 전달하여 클라이언트가 해당 페이지를 요청하지만 후자의 경우 서버에서 해당페이지를 바로 넘김_
 
 _데이터 전송 -> body: 데이터 본문, header: 데이터 주소 등등_
 * post방식: 파라미터가 바디에 포함됨(보안, 데이터 제한 없음, 다루기 까다로움) -> 로그인창 등
