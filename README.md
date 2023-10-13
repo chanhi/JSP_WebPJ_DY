@@ -50,11 +50,12 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 - 반드시 종료태그 사용
 - <jsp:include>
 - <jsp:forward> : redirect와 다르게 서버에서 다른 페이지로 변경한 뒤 클라이언트에 넘겨줌
-- <jsp:useBean>, <jsp:useBean>, <jsp:useBean>
+- <jsp:useBean>, <jsp:setProperty>, <jsp:getProperty>
    - ```RegisterBean regBean = new com.dongyang.bean.RegisterBean();``` 는 ```<jsp:useBean class="com.dongyang.bean.RegisterBean" id="regBean" scope="session"></jsp:useBean>``` 와 같음
    - useBean의 scope는 어느 영역을 쓸 결정
    - ```String memId = request.getParameter("id"); regBean.setId(id);``` 는 ```<jsp:setProperty name="regBean" property="id" value=<%request.getParameter("id")%> />```
    - ```<jsp:setProperty name="regBean" property="*" />``` 파라미터의 name과 DTO 주머니의 객체 이름이 같으면 property="*"을 이용하여 한번에 값을 가져올 수 있다
+   - ```<jsp:getProperty property="email" name="regBean"/>``` `````<%=regBean.getEmail()`
 - <jsp:param>
 
 _response.sendRedirect() 와 <jsp:forward> : 전자는 클라이언트에게 해당 페이지(jsp)로 이동하라고 전달하여 클라이언트가 해당 페이지를 요청하지만 후자의 경우 서버에서 해당페이지를 바로 넘김_
