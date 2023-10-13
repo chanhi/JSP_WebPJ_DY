@@ -24,7 +24,7 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 #### jsp 구성요소: 지시어/ 스크립트릿/ 선언부 etc
 - 지시어: ```<%@지시어명 속성 ... %>``` jsp 환경 설정 명령어
    - ```<%@ page language="java" contentType=" ... %>``` -> jsp 페이지에 대한 환경 설정(언어, 인코딩 등)
-- 스크립트릿: ```<% ... %>``` java코드 약간 python f{}
+- 스크립트릿: ```<% ... %>``` java코드
 - 표현식: ```<%= ... %>``` 변수 및 메소드 값 리턴
 - 선언부: ```<%! ... %>``` 변수 및 메소드 선언
 
@@ -36,19 +36,25 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
    - ```response.sendRedirect()``` : 웹 브라우저에게 다른 페이지로 이동하라고 지시
 - out :버퍼를 이용해서 내용을 출력
    - ```flush()``` : 버퍼의 내용을 모두 내보
-- session
-   - setAttribute("name", "value")
+   -  ```autoFLush()``` : true, false로 자동으로 내보낼지 말지 결
+- session, application, pageContext
+   - setAttribute("name", "value"): value는 Object객체
    - removeAttribute("name")
-   - getAttribute("name:)
-- application
+   - invalidate() : session 객체의 메소드, 모든 attribute를 제거
+   - getAttribute("name:): return 값은 Object객체
 
-* page -> request -> session -> application
+* 내장객체 영역: page -> request -> session -> application (서버에서 메모리 생성 / 쿠키만 클라이언트에서 생성)
+* 내장객체: page: pageContext, request: request, session: session, application: application
 
 #### 액션태그
 - 반드시 종료태그 사용
 - <jsp:include>
 - <jsp:forward> : redirect와 다르게 서버에서 다른 페이지로 변경한 뒤 클라이언트에 넘겨줌
-- <jsp:useBean>
+- <jsp:useBean>, <jsp:useBean>, <jsp:useBean>
+   - ```RegisterBean regBean = new com.dongyang.bean.RegisterBean();``` 는 ```<jsp:useBean class="com.dongyang.bean.RegisterBean" id="regBean" scope="session"></jsp:useBean>``` 와 같음
+   - useBean의 scope는 어느 영역을 쓸 결정
+   - ```String memId = request.getParameter("id"); regBean.setId(id);``` 는 ```<jsp:setProperty name="regBean" property="id" value=<%request.getParameter("id")%> />```
+   - ```<jsp:setProperty name="regBean" property="*" />``` 파라미터의 name과 DTO 주머니의 객체 이름이 같으면 property="*"을 이용하여 한번에 값을 가져올 수 있다
 - <jsp:param>
 
 _response.sendRedirect() 와 <jsp:forward> : 전자는 클라이언트에게 해당 페이지(jsp)로 이동하라고 전달하여 클라이언트가 해당 페이지를 요청하지만 후자의 경우 서버에서 해당페이지를 바로 넘김_
@@ -58,5 +64,12 @@ _데이터 전송 -> body: 데이터 본문, header: 데이터 주소 등등_
 * get방식: 파라미터가 헤더에 포함됨(보안에 취약, 전송하는 데이터의 크기가 제한 됨, 다루기 쉬움) -> 검색창 등
 
 * 한글은 post의 경우 서버에서 ```request.setCharacterEncoding("utf-8")```을 통해 변환을 시켜주어야 한다.
+
+#### MVC(Model View Controllen) 모델
+- Model: javaBean(데이터를 전송하기 위한 주머니)
+   - DTO(Data Transform Object): 데이터 모음
+   - DAO(Data Access Object): DB 접근 코드를 포함
+- View: jsp
+- controllen: sublet
 
 ### Sublet
