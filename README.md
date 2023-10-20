@@ -24,6 +24,7 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 #### jsp 구성요소: 지시어/ 스크립트릿/ 선언부 etc
 - 지시어: ```<%@지시어명 속성 ... %>``` jsp 환경 설정 명령어
    - ```<%@ page language="java" contentType=" ... %>``` -> jsp 페이지에 대한 환경 설정(언어, 인코딩 등)
+   - ```<%@ include file="top.jsp"%> -> 페이지에 포함
 - 스크립트릿: ```<% ... %>``` java코드
 - 표현식: ```<%= ... %>``` 변수 및 메소드 값 리턴
 - 선언부: ```<%! ... %>``` 변수 및 메소드 선언
@@ -48,12 +49,22 @@ html -> xml(네임스페이스[태그] 사용자 지정), 환경설정 파일로
 
 #### 액션태그
 - 반드시 종료태그 사용
-- <jsp:include>
+- <jsp:include>: 한 화면에 출력되도록 include -> 다만 서로 다른 페이지, 그저 한 화면에 출력(두 개의 페이지 영역)
+   - ```<jsp:include page="이동할 페이지" flush="true"/>```
+   - ```<jsp:include page="이동할 페이지" flush="false"/>``` //중복할게 있을 떄
+   - 서로의 페이지에 데이터를 주고 받기(파라미터)
+   ```
+   <jsp:include page="이동할 페이지" flush="true>
+     <jsp:param name="" value=""/>
+   <jsp:include/>
+   ```
+   * <%@ include file=""%>은 같은 페이지 영역을 사용하여 출력됨
+   * 실행되어지는 페이지 기준으로 path가 지정되어야 한다. -> 모듈화된 페이지에 a링크가 걸려있을 떄 이 링크는 실행되어지는 페이지를 기준으로 지정해야 한다.
 - <jsp:forward> : redirect와 다르게 서버에서 다른 페이지로 변경한 뒤 클라이언트에 넘겨줌
 - <jsp:useBean>, <jsp:setProperty>, <jsp:getProperty>
    - ```RegisterBean regBean = new com.dongyang.bean.RegisterBean();``` 는 ```<jsp:useBean class="com.dongyang.bean.RegisterBean" id="regBean" scope="session"></jsp:useBean>``` 와 같음
    - useBean의 scope는 어느 영역을 쓸 결정
-   - ```String memId = request.getParameter("id"); regBean.setId(id);``` 는 ```<jsp:setProperty name="regBean" property="id" value=<%request.getParameter("id")%> />```
+   - ```String memId = request.getParameter("id"); regBean.setId(id);``` 는 ```<jsp:setProperty name="regBean" property="memid" value=<%request.getParameter("id")%> />```
    - ```<jsp:setProperty name="regBean" property="*" />``` 파라미터의 name과 DTO 주머니의 객체 이름이 같으면 property="*"을 이용하여 한번에 값을 가져올 수 있다
    - ```<jsp:getProperty property="email" name="regBean"/>``` `````<%=regBean.getEmail()`
 - <jsp:param>
@@ -66,11 +77,11 @@ _데이터 전송 -> body: 데이터 본문, header: 데이터 주소 등등_
 
 * 한글은 post의 경우 서버에서 ```request.setCharacterEncoding("utf-8")```을 통해 변환을 시켜주어야 한다.
 
-#### MVC(Model View Controllen) 모델
+#### MVC(Model View Controller) 모델
 - Model: javaBean(데이터를 전송하기 위한 주머니)
-   - DTO(Data Transform Object): 데이터 모음
+   - DTO(Data Transform Object): 데이터 모음 (필드를 만들 떄 private로 만들고 getter, setter를 만든다)
    - DAO(Data Access Object): DB 접근 코드를 포함
 - View: jsp
-- controllen: sublet
+- controller: sublet
 
 ### Sublet
