@@ -86,3 +86,6 @@ _데이터 전송 -> body: 데이터 본문, header: 데이터 주소 등등_
 - controller: sublet
 
 ### Sublet
+
+mysql
+8.0.35
